@@ -882,8 +882,189 @@ dealloc(*)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
+          <ID>1337321956</ID>
+          <Description>"Shell Shop Price Edit (set value and open shop)"</Description>
+          <Options moHideChildren="1"/>
+          <Color>FFFF00</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Tiny Aquarium.exe
+  Version: 
+  Date   : 2025-09-10
+  Author : MBRKiNG
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+aobscanmodule(shellshop,GameAssembly.dll,48 8B ?? ?? 48 85 ?? 0F 84 ?? ?? ?? ?? 80 ?? ?? ?? 75 ?? 48 8B ?? ?? 48 85 ?? 0F 84 ?? ?? ?? ?? 45 33 ?? B2 ?? E8 ?? ?? ?? ?? 48 8B ?? ?? ) // should be unique
+alloc(newmem,$1000,shellshop)
+
+label(code)
+label(return)
+label(ssval)
+newmem:
+code:
+  mov rax,[rdi+20]
+  mov r15,[ssval]
+  mov [rax+34],r15
+  mov byte ptr [rax+38],01
+  test rax,rax
+  jmp return
+ssval:
+  dd (int)-10000000
+shellshop:
+  jmp newmem
+  nop 2
+return:
+registersymbol(shellshop ssval)
+[DISABLE]
+shellshop:
+  db 48 8B 47 20 48 85 C0
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll.il2cpp+15C8A6
+
+GameAssembly.dll.il2cpp+15C7A5: 48 8B 4F 20           - mov rcx,[rdi+20]
+GameAssembly.dll.il2cpp+15C7A9: 48 8B 77 38           - mov rsi,[rdi+38]
+GameAssembly.dll.il2cpp+15C7AD: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C7B0: 0F 84 73 04 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C7B6: 48 8B 11              - mov rdx,[rcx]
+GameAssembly.dll.il2cpp+15C7B9: 48 8B 82 B8 01 00 00  - mov rax,[rdx+000001B8]
+GameAssembly.dll.il2cpp+15C7C0: 48 8B 92 C0 01 00 00  - mov rdx,[rdx+000001C0]
+GameAssembly.dll.il2cpp+15C7C7: FF D0                 - call rax
+GameAssembly.dll.il2cpp+15C7C9: 33 D2                 - xor edx,edx
+GameAssembly.dll.il2cpp+15C7CB: 89 44 24 40           - mov [rsp+40],eax
+GameAssembly.dll.il2cpp+15C7CF: 48 8D 4C 24 40        - lea rcx,[rsp+40]
+GameAssembly.dll.il2cpp+15C7D4: E8 F7 84 F1 00        - call System.Int32.ToString
+GameAssembly.dll.il2cpp+15C7D9: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll.il2cpp+15C7DC: 48 8B D0              - mov rdx,rax
+GameAssembly.dll.il2cpp+15C7DF: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll.il2cpp+15C7E2: E8 89 2D D6 00        - call System.String.Concat
+GameAssembly.dll.il2cpp+15C7E7: 48 85 F6              - test rsi,rsi
+GameAssembly.dll.il2cpp+15C7EA: 0F 84 39 04 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C7F0: 4C 8B 0E              - mov r9,[rsi]
+GameAssembly.dll.il2cpp+15C7F3: 48 8B D0              - mov rdx,rax
+GameAssembly.dll.il2cpp+15C7F6: 48 8B CE              - mov rcx,rsi
+GameAssembly.dll.il2cpp+15C7F9: 4D 8B 81 60 05 00 00  - mov r8,[r9+00000560]
+GameAssembly.dll.il2cpp+15C800: 41 FF 91 58 05 00 00  - call qword ptr [r9+00000558]
+GameAssembly.dll.il2cpp+15C807: 48 8B 4F 20           - mov rcx,[rdi+20]
+GameAssembly.dll.il2cpp+15C80B: 48 8B 5F 40           - mov rbx,[rdi+40]
+GameAssembly.dll.il2cpp+15C80F: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C812: 0F 84 11 04 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C818: 48 8B 11              - mov rdx,[rcx]
+GameAssembly.dll.il2cpp+15C81B: 48 8B 82 88 01 00 00  - mov rax,[rdx+00000188]
+GameAssembly.dll.il2cpp+15C822: 48 8B 92 90 01 00 00  - mov rdx,[rdx+00000190]
+GameAssembly.dll.il2cpp+15C829: FF D0                 - call rax
+GameAssembly.dll.il2cpp+15C82B: 48 85 DB              - test rbx,rbx
+GameAssembly.dll.il2cpp+15C82E: 0F 84 F5 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C834: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll.il2cpp+15C837: 48 8B D0              - mov rdx,rax
+GameAssembly.dll.il2cpp+15C83A: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll.il2cpp+15C83D: E8 0E 21 DC 01        - call UnityEngine.UI.Image.set_sprite
+GameAssembly.dll.il2cpp+15C842: 48 8B 4F 28           - mov rcx,[rdi+28]
+GameAssembly.dll.il2cpp+15C846: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C849: 0F 84 DA 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C84F: 48 8B 49 40           - mov rcx,[rcx+40]
+GameAssembly.dll.il2cpp+15C853: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C856: 0F 84 CD 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C85C: 4C 8B 05 4D 57 79 02  - mov r8,[GameAssembly.dll.data+F4FB0]
+GameAssembly.dll.il2cpp+15C863: 48 8B 57 20           - mov rdx,[rdi+20]
+GameAssembly.dll.il2cpp+15C867: E8 54 E5 56 00        - call GameAssembly.dll.il2cpp+6CADC0
+GameAssembly.dll.il2cpp+15C86C: 84 C0                 - test al,al
+GameAssembly.dll.il2cpp+15C86E: 74 60                 - je GameAssembly.dll.il2cpp+15C8D0
+GameAssembly.dll.il2cpp+15C870: 48 8B 47 28           - mov rax,[rdi+28]
+GameAssembly.dll.il2cpp+15C874: 48 85 C0              - test rax,rax
+GameAssembly.dll.il2cpp+15C877: 0F 84 AC 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C87D: 48 8B 48 40           - mov rcx,[rax+40]
+GameAssembly.dll.il2cpp+15C881: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C884: 0F 84 9F 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C88A: 4C 8B 0D D7 58 79 02  - mov r9,[GameAssembly.dll.data+F5168]
+GameAssembly.dll.il2cpp+15C891: 4C 8D 44 24 50        - lea r8,[rsp+50]
+GameAssembly.dll.il2cpp+15C896: 48 8B 57 20           - mov rdx,[rdi+20]
+GameAssembly.dll.il2cpp+15C89A: E8 41 4C 57 00        - call GameAssembly.dll.il2cpp+6D14E0
+GameAssembly.dll.il2cpp+15C89F: 83 7C 24 50 00        - cmp dword ptr [rsp+50],00
+GameAssembly.dll.il2cpp+15C8A4: 7F 2A                 - jg GameAssembly.dll.il2cpp+15C8D0
+// ---------- INJECTING HERE ----------
+GameAssembly.dll.il2cpp+15C8A6: 48 8B 47 20           - mov rax,[rdi+20]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll.il2cpp+15C8AA: 48 85 C0              - test rax,rax
+GameAssembly.dll.il2cpp+15C8AD: 0F 84 76 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C8B3: 80 78 30 00           - cmp byte ptr [rax+30],00
+GameAssembly.dll.il2cpp+15C8B7: 75 17                 - jne GameAssembly.dll.il2cpp+15C8D0
+GameAssembly.dll.il2cpp+15C8B9: 48 8B 4F 48           - mov rcx,[rdi+48]
+GameAssembly.dll.il2cpp+15C8BD: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C8C0: 0F 84 63 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C8C6: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll.il2cpp+15C8C9: B2 01                 - mov dl,01
+GameAssembly.dll.il2cpp+15C8CB: E8 80 6A C3 01        - call UnityEngine.GameObject.SetActive
+GameAssembly.dll.il2cpp+15C8D0: 48 8B 47 20           - mov rax,[rdi+20]
+GameAssembly.dll.il2cpp+15C8D4: 48 8B 77 58           - mov rsi,[rdi+58]
+GameAssembly.dll.il2cpp+15C8D8: 48 85 C0              - test rax,rax
+GameAssembly.dll.il2cpp+15C8DB: 0F 84 48 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C8E1: 80 78 31 00           - cmp byte ptr [rax+31],00
+GameAssembly.dll.il2cpp+15C8E5: 75 09                 - jne GameAssembly.dll.il2cpp+15C8F0
+GameAssembly.dll.il2cpp+15C8E7: 33 DB                 - xor ebx,ebx
+GameAssembly.dll.il2cpp+15C8E9: 8B D3                 - mov edx,ebx
+GameAssembly.dll.il2cpp+15C8EB: E9 BE 00 00 00        - jmp GameAssembly.dll.il2cpp+15C9AE
+GameAssembly.dll.il2cpp+15C8F0: 80 3D 0F 2F A1 02 00  - cmp byte ptr [GameAssembly.dll+2E8A806],00
+GameAssembly.dll.il2cpp+15C8F7: 75 13                 - jne GameAssembly.dll.il2cpp+15C90C
+GameAssembly.dll.il2cpp+15C8F9: 48 8D 0D D0 A8 74 02  - lea rcx,[GameAssembly.dll.data+AA1D0]
+GameAssembly.dll.il2cpp+15C900: E8 EB 02 DE FF        - call GameAssembly.il2cpp_get_exception_argument_null+3D0
+GameAssembly.dll.il2cpp+15C905: C6 05 FA 2E A1 02 01  - mov byte ptr [GameAssembly.dll+2E8A806],01
+GameAssembly.dll.il2cpp+15C90C: 48 8B 05 BD A8 74 02  - mov rax,[GameAssembly.dll.data+AA1D0]
+GameAssembly.dll.il2cpp+15C913: 48 8B 88 B8 00 00 00  - mov rcx,[rax+000000B8]
+GameAssembly.dll.il2cpp+15C91A: 48 8B 01              - mov rax,[rcx]
+GameAssembly.dll.il2cpp+15C91D: 48 85 C0              - test rax,rax
+GameAssembly.dll.il2cpp+15C920: 0F 84 03 03 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C926: 80 3D F1 2E A1 02 00  - cmp byte ptr [GameAssembly.dll+2E8A81E],00
+GameAssembly.dll.il2cpp+15C92D: 48 8B 58 50           - mov rbx,[rax+50]
+GameAssembly.dll.il2cpp+15C931: 75 13                 - jne GameAssembly.dll.il2cpp+15C946
+GameAssembly.dll.il2cpp+15C933: 48 8D 0D B6 F3 7A 02  - lea rcx,[GameAssembly.dll.data+10ECF0]
+GameAssembly.dll.il2cpp+15C93A: E8 B1 02 DE FF        - call GameAssembly.il2cpp_get_exception_argument_null+3D0
+GameAssembly.dll.il2cpp+15C93F: C6 05 D8 2E A1 02 01  - mov byte ptr [GameAssembly.dll+2E8A81E],01
+GameAssembly.dll.il2cpp+15C946: 48 8B 05 A3 F3 7A 02  - mov rax,[GameAssembly.dll.data+10ECF0]
+GameAssembly.dll.il2cpp+15C94D: 48 8B 90 B8 00 00 00  - mov rdx,[rax+000000B8]
+GameAssembly.dll.il2cpp+15C954: 48 8B 02              - mov rax,[rdx]
+GameAssembly.dll.il2cpp+15C957: 48 85 C0              - test rax,rax
+GameAssembly.dll.il2cpp+15C95A: 0F 84 C9 02 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C960: 48 8B 50 38           - mov rdx,[rax+38]
+GameAssembly.dll.il2cpp+15C964: 48 85 D2              - test rdx,rdx
+GameAssembly.dll.il2cpp+15C967: 0F 84 BC 02 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C96D: 48 85 DB              - test rbx,rbx
+GameAssembly.dll.il2cpp+15C970: 0F 84 B3 02 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C976: 8B 52 10              - mov edx,[rdx+10]
+GameAssembly.dll.il2cpp+15C979: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll.il2cpp+15C97C: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll.il2cpp+15C97F: E8 EC 1F FC FF        - call LevelingManager.GetLevel
+GameAssembly.dll.il2cpp+15C984: 48 8B 4F 20           - mov rcx,[rdi+20]
+GameAssembly.dll.il2cpp+15C988: 8B E8                 - mov ebp,eax
+GameAssembly.dll.il2cpp+15C98A: 48 85 C9              - test rcx,rcx
+GameAssembly.dll.il2cpp+15C98D: 0F 84 96 02 00 00     - je GameAssembly.dll.il2cpp+15CC29
+GameAssembly.dll.il2cpp+15C993: 48 8B 11              - mov rdx,[rcx]
+GameAssembly.dll.il2cpp+15C996: 4C 8B 82 C8 01 00 00  - mov r8,[rdx+000001C8]
+GameAssembly.dll.il2cpp+15C99D: 48 8B 92 D0 01 00 00  - mov rdx,[rdx+000001D0]
+GameAssembly.dll.il2cpp+15C9A4: 41 FF D0              - call r8
+GameAssembly.dll.il2cpp+15C9A7: 33 DB                 - xor ebx,ebx
+GameAssembly.dll.il2cpp+15C9A9: 3B E8                 - cmp ebp,eax
+GameAssembly.dll.il2cpp+15C9AB: 0F 9C C2              - setl dl
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1337321957</ID>
+              <Description>"Shell Shop Price (set negative value -900000 e.g.)"</Description>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ssval</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>1337321883</ID>
-          <Description>"Ignore Shop Currency"</Description>
+          <Description>"Ignore Shop Currency (dont use with buy egg or shell shop)"</Description>
+          <Color>0000FF</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : Tiny Aquarium.exe
   Version: 
@@ -1237,6 +1418,119 @@ nop
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="ShopItemUIObject" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="8096">
+      <Elements>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="m_CancellationTokenSource" DisplayMethod="unsigned integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="shopItem" DisplayMethod="unsigned integer">
+          <Structure Name="CosmeticShopItem" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="8096">
+            <Elements>
+              <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+              <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="_idString" DisplayMethod="unsigned integer"/>
+              <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="name" DisplayMethod="unsigned integer"/>
+              <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="unitsThisPackageHas" DisplayMethod="unsigned integer"/>
+              <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="totalStockOfThisPackage" DisplayMethod="unsigned integer"/>
+              <Element Offset="48" Vartype="Byte" Bytesize="1" OffsetHex="00000030" Description="hasInfiniteStock" DisplayMethod="unsigned integer"/>
+              <Element Offset="49" Vartype="Byte" Bytesize="1" OffsetHex="00000031" Description="isLockedByLevel" DisplayMethod="unsigned integer"/>
+              <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="price" DisplayMethod="unsigned integer"/>
+              <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="currency" DisplayMethod="unsigned integer"/>
+              <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="minLevelToUnlock" DisplayMethod="unsigned integer"/>
+              <Element Offset="64" Vartype="Byte" Bytesize="1" OffsetHex="00000040" Description="isEventItem" DisplayMethod="unsigned integer"/>
+              <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="cosmeticType" DisplayMethod="unsigned integer"/>
+            </Elements>
+          </Structure>
+        </Element>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="myShopSection" DisplayMethod="unsigned integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="t_name" DisplayMethod="unsigned integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="t_price" DisplayMethod="unsigned integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="t_icon" DisplayMethod="unsigned integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="outOfStockStamp" DisplayMethod="unsigned integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="alreadyOwnedStamp" DisplayMethod="unsigned integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="lockedByLevelUIObject" DisplayMethod="unsigned integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="text_lockLevel" DisplayMethod="unsigned integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="selectionGlow" DisplayMethod="unsigned integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="originalScale" DisplayMethod="unsigned integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="lockedUIObject" DisplayMethod="unsigned integer"/>
+        <Element Offset="136" Vartype="Byte" Bytesize="1" OffsetHex="00000088" Description="forceLocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="itemBought" DisplayMethod="unsigned integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="ShopItemUIObject" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="8096">
+      <Elements>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="m_CancellationTokenSource" DisplayMethod="unsigned integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="shopItem" DisplayMethod="unsigned integer">
+          <Structure Name="CosmeticShopItem" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="8096">
+            <Elements>
+              <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+              <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="_idString" DisplayMethod="unsigned integer"/>
+              <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="name" DisplayMethod="unsigned integer"/>
+              <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="unitsThisPackageHas" DisplayMethod="unsigned integer"/>
+              <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="totalStockOfThisPackage" DisplayMethod="unsigned integer"/>
+              <Element Offset="48" Vartype="Byte" Bytesize="1" OffsetHex="00000030" Description="hasInfiniteStock" DisplayMethod="unsigned integer"/>
+              <Element Offset="49" Vartype="Byte" Bytesize="1" OffsetHex="00000031" Description="isLockedByLevel" DisplayMethod="unsigned integer"/>
+              <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="price" DisplayMethod="unsigned integer"/>
+              <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="currency" DisplayMethod="unsigned integer"/>
+              <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="minLevelToUnlock" DisplayMethod="unsigned integer"/>
+              <Element Offset="64" Vartype="Byte" Bytesize="1" OffsetHex="00000040" Description="isEventItem" DisplayMethod="unsigned integer"/>
+              <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="cosmeticType" DisplayMethod="unsigned integer"/>
+            </Elements>
+          </Structure>
+        </Element>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="myShopSection" DisplayMethod="unsigned integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="t_name" DisplayMethod="unsigned integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="t_price" DisplayMethod="unsigned integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="t_icon" DisplayMethod="unsigned integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="outOfStockStamp" DisplayMethod="unsigned integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="alreadyOwnedStamp" DisplayMethod="unsigned integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="lockedByLevelUIObject" DisplayMethod="unsigned integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="text_lockLevel" DisplayMethod="unsigned integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="selectionGlow" DisplayMethod="unsigned integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="originalScale" DisplayMethod="unsigned integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="lockedUIObject" DisplayMethod="unsigned integer"/>
+        <Element Offset="136" Vartype="Byte" Bytesize="1" OffsetHex="00000088" Description="forceLocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="itemBought" DisplayMethod="unsigned integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="ShopItemUIObject" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="8096">
+      <Elements>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="m_CancellationTokenSource" DisplayMethod="unsigned integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="shopItem" DisplayMethod="unsigned integer">
+          <Structure Name="CosmeticShopItem" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="8096">
+            <Elements>
+              <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="m_CachedPtr" DisplayMethod="unsigned integer"/>
+              <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="_idString" DisplayMethod="unsigned integer"/>
+              <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="name" DisplayMethod="unsigned integer"/>
+              <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="unitsThisPackageHas" DisplayMethod="unsigned integer"/>
+              <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="totalStockOfThisPackage" DisplayMethod="unsigned integer"/>
+              <Element Offset="48" Vartype="Byte" Bytesize="1" OffsetHex="00000030" Description="hasInfiniteStock" DisplayMethod="unsigned integer"/>
+              <Element Offset="49" Vartype="Byte" Bytesize="1" OffsetHex="00000031" Description="isLockedByLevel" DisplayMethod="unsigned integer"/>
+              <Element Offset="52" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000034" Description="price" DisplayMethod="unsigned integer"/>
+              <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="currency" DisplayMethod="unsigned integer"/>
+              <Element Offset="60" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000003C" Description="minLevelToUnlock" DisplayMethod="unsigned integer"/>
+              <Element Offset="64" Vartype="Byte" Bytesize="1" OffsetHex="00000040" Description="isEventItem" DisplayMethod="unsigned integer"/>
+              <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="cosmeticType" DisplayMethod="unsigned integer"/>
+            </Elements>
+          </Structure>
+        </Element>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="myShopSection" DisplayMethod="unsigned integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="t_name" DisplayMethod="unsigned integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="t_price" DisplayMethod="unsigned integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="t_icon" DisplayMethod="unsigned integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="outOfStockStamp" DisplayMethod="unsigned integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="alreadyOwnedStamp" DisplayMethod="unsigned integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="lockedByLevelUIObject" DisplayMethod="unsigned integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="text_lockLevel" DisplayMethod="unsigned integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="selectionGlow" DisplayMethod="unsigned integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="originalScale" DisplayMethod="unsigned integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="lockedUIObject" DisplayMethod="unsigned integer"/>
+        <Element Offset="136" Vartype="Byte" Bytesize="1" OffsetHex="00000088" Description="forceLocked" DisplayMethod="unsigned integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="itemBought" DisplayMethod="unsigned integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
   <Comments>36 10 00 00
 </Comments>
 </CheatTable>
