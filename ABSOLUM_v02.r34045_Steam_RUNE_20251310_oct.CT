@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1337111356</ID>
+      <Description>"------------------------------------------------------------------------"</Description>
+      <Color>008000</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1337321953</ID>
+      <Description>"ABSOLUM_v02.r34045_Steam_RUNE_20251310_MBRKiNG"</Description>
+      <Options moHideChildren="1"/>
+      <Color>4080FF</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Invulnerable"</Description>
+          <Color>0080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(invulnerable,Absolum.exe,7D ?? B8 ?? ?? ?? ?? 48 ?? ?? ?? 5B 5D 5E 5F C3 8B ??48 ?? ?? ?? 5B 5D 5E 5F C3 90 90 90 90 90 90 90 90 57 56 48 ?? ?? ?? 48 ?? ?? 48 ?? ??)
+invulnerable:
+  db 90 90 ?? 00 00
+registersymbol(invulnerable)
+[DISABLE]
+invulnerable:
+  db 7D 0E B8 9A 19 00 00
+unregistersymbol(*)
+
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"Damage Received 0% / Damage Deal 9k%"</Description>
+          <Color>0080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(dmghp,Absolum.exe,48 ?? ?? ?? ?? ?? 75 ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 ?? ?? C7 ?? ?? ?? ?? ?? ?? C7 ?? ?? ?? ?? ?? ?? 3B)
+dmghp+6:
+  db 90 90
+dmghp+1A:
+  db 28 23
+dmghp+21:
+  db 00
+registersymbol(dmghp)
+[DISABLE]
+
+dmghp+6:
+  db 75 31
+dmghp+1A:
+  db 64 00
+dmghp+21:
+  db 64
+unregistersymbol(*)
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"Ignore Vendor Gold"</Description>
+          <Color>0080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(freeshop,Absolum.exe,8B ?? 48 ?? ?? E8 ?? ?? ?? ?? 3B ?? 0F ?? ?? ?? ?? ?? 48 ?? ?? ?? 39 ?? 48 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? ?? 48 ?? ?? 75 ?? 39 ?? 48 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 ?? ?? ?? 48 ?? ?? 75 ?? 41 ?? ?? ?? ?? ?? EB ?? 39 ?? 48 ?? ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 ?? ?? 74 ?? 44 ?? ?? B9 ?? ?? ?? ?? EB ?? 45 ?? ?? 33 ?? 85 ?? 74 ?? EB ?? 41 ?? ?? ?? ?? ?? 41 ?? ?? ?? 0F ?? ?? ?? ?? ?? 33 ?? 89 ?? ?? ?? C7 ?? ?? ?? ?? ?? ?? ?? C7 ?? ?? ?? ?? ?? ?? ?? 89 ?? ?? ?? 48 ?? ?? BA ?? ?? ?? ?? 4C ?? ?? ?? ?? ?? ?? 41 ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? E9 ?? ?? ?? ?? 48)
+freeshop:
+  mov eax,esi
+registersymbol(freeshop)
+[DISABLE]
+
+freeshop:
+  mov esi,eax
+unregistersymbol(freeshop)
+
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"Endless Vendor Items / Inf Perk Stacking"</Description>
+          <Color>0080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(endlessvendoritems,Absolum.exe,83 ?? ?? ?? ?? ?? ?? 0F ?? ?? ?? ?? ?? 48 ?? ?? ?? 8B ?? ?? 8B ?? C1 ?? ?? 0F ?? ?? F2 ?? ?? ?? 81 ?? ?? ?? ?? ?? 0F ?? ?? F2 ?? ?? ?? F2 ?? ?? ?? ?? ?? ?? ?? F2 ?? ?? ?? F2 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 0F ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? 0F ?? ?? 0F ?? ?? 76 ?? 0F ?? ?? EB ?? 0F ?? ?? ?? ?? ?? ?? 76 ?? F3 ?? ?? ?? ?? ?? ?? ?? EB ?? 0F ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? 0F ?? ?? F3 ?? ?? ??)
+endlessvendoritems:
+  db C6 86 28 01 00 00 01
+endlessvendoritems+7:
+  db 90 E9
+registersymbol(endlessvendoritems)
+[DISABLE]
+endlessvendoritems:
+  db 83 BE 28 01 00 00 05
+endlessvendoritems+7:
+  db 0F 85
+unregistersymbol(*)
+
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>50</ID>
+          <Description>"Ignore Crystals - Perk Cave NG+"</Description>
+          <Color>0080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+if syntaxcheck then return end
+    messageDialog("Enable *1: Freeze Upgrade Currency* so that you do not get into a negative value. \n\nKeep Shopping until the Game switches to free of charge Perks!")
+{$asm}
+[ENABLE]
+aobscanmodule(ignocrystalsperk,Absolum.exe,8B ?? 2B ?? ?? ?? 0F ?? ?? ?? ?? ?? 48 ?? ?? ?? 39 ?? 48 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? ?? 48)
+ignocrystalsperk+6:
+  db 90 E9
+registersymbol(ignocrystalsperk)
+[DISABLE]
+ignocrystalsperk+6:
+  db 0F 89
+unregistersymbol(*)
+
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337111334</ID>
+          <Description>"Use Only Option 1 or 2 "</Description>
+          <Color>FFFF00</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"1: Freeze Upgrade Currency"</Description>
+              <Color>0080FF</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+aobscanmodule(upgradecurrency,Absolum.exe,2B ?? 89 ?? E8 ?? ?? ?? ?? 3B ?? ?? 0F ?? ?? ?? ?? ?? 4A ?? ?? ?? ?? 48 ?? ?? 44 ?? ?? ?? ?? 41)
+upgradecurrency:
+  db 90 90
+registersymbol(upgradecurrency)
+[DISABLE]
+upgradecurrency:
+  db 2B D1
+unregistersymbol(*)
+
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1337111333</ID>
+              <Description>"2: Add Upgrade Currency during Upgrade"</Description>
+              <Color>4080FF</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+aobscanmodule(upgradecurrency,Absolum.exe,2B ?? 89 ?? E8 ?? ?? ?? ?? 3B ?? ?? 0F ?? ?? ?? ?? ?? 4A ?? ?? ?? ?? 48 ?? ?? 44 ?? ?? ?? ?? 41 ?? ?? ?? ?? ??)
+upgradecurrency:
+  db 01 CA
+registersymbol(upgradecurrency)
+[DISABLE]
+upgradecurrency:
+  db 2B D1
+unregistersymbol(*)
+
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337111332</ID>
+          <Description>"OPEN GAMESAVE LOCATION &amp; CREATE "Absolum" GameSaveBackup"</Description>
+          <Color>00FF00</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+if syntaxcheck then return end
+[ENABLE]
+local UserProfilePath = os.getenv("USERPROFILE")
+local GameSavePath = UserProfilePath .. "\\AppData\\Local\\Absolum_SaveGame_Steam"
+local DatabasePath = GameSavePath .. "\\Save.bin"
+local file = io.open(DatabasePath, "r")
+if file then
+    file:close()
+    local timestamp = os.date("%Y-%m-%d_%H-%M-%S")
+    local backupPath = DatabasePath .. "." .. timestamp .. ".MBRKiNG_Backup"
+    local command = 'copy "' .. DatabasePath .. '" "' .. backupPath .. '"'
+    os.execute(command)
+    messageDialog("GAMESAVE Backup with Timestamp Created: Original Filename 'Save.bin' \n\n" .. backupPath)
+else
+    messageDialog("ERROR: Save.bin File not Found. no Backup was Created.")
+end
+shellExecute(GameSavePath)
+local memrec = memrec or getAddressList().getMemoryRecordByDescription("OPEN - Relic Hunters Legend - SAVEGAME LOCATION")
+local timer = createTimer()
+timer.Interval = 1 * 100
+timer.OnTimer = function(theTimerCallingThisFunction)
+  memrec.Active = false
+  timer.destroy()
+end
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>104269</ID>
+      <Description>"------------------------------------------------------------------------"</Description>
+      <Color>008000</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10326</ID>
+      <Description>"Discord/PayPal-Donation-Link/OCT"</Description>
+      <Options moHideChildren="1"/>
+      <Color>40FF00</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1337111357</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10324</ID>
+          <Description>"Support/Donations can be Added to my PAYPAL.ME"</Description>
+          <Color>00FF00</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104128</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>41356</ID>
+          <Description>" [&lt;--CHECKBOX] PALPAL.ME Donation/Support Link"</Description>
+          <Color>F8EC07</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://paypal.me/mobiusce')
+{$asm}
+nop
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104152</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104270</ID>
+          <Description>"my Discord-ID:  --&gt;  ScooPaX#8840  &lt;--"</Description>
+          <Options moAlwaysHideChildren="1"/>
+          <Color>8000FF</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104155</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104156</ID>
+          <Description>"[&lt;--CHECKBOX]_OPEN_OCT_TOPIC"</Description>
+          <Color>8000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://opencheattables.com/viewtopic.php?t=1576')
+{$asm}
+nop
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104129</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104151</ID>
+          <Description>"[&lt;--CHECKBOX]_OPEN_CHEATENGINE.ORG"</Description>
+          <Color>8000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://www.cheatengine.org/')
+{$asm}
+nop
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10634</ID>
+      <Description>"------------------------------------------------------------------------"</Description>
+      <Options moHideChildren="1"/>
+      <Color>008000</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
