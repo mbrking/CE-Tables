@@ -9,7 +9,7 @@
     </CheatEntry>
     <CheatEntry>
       <ID>1337321953</ID>
-      <Description>"ABSOLUM_v02.r34045_Steam_RUNE_20251310_MBRKiNG"</Description>
+      <Description>"ABSOLUM_v02.r34045_Steam_RUNE_20251410_MBRKiNG"</Description>
       <Options moHideChildren="1"/>
       <Color>4080FF</Color>
       <GroupHeader>1</GroupHeader>
@@ -57,6 +57,288 @@ dmghp+21:
 unregistersymbol(*)
 
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337111408</ID>
+          <Description>"EXP Multiplier"</Description>
+          <Options moHideChildren="1"/>
+          <Color>4080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(expmulti,Absolum.exe,01 ?? ?? ?? ?? ?? 8B ?? E8 ?? ?? ?? ?? 48 ?? ?? ?? 3B ?? ?? 0F ?? ?? ?? ?? ??)
+alloc(newmem,$1000,expmulti)
+label(code)
+label(return)
+label(mVal)
+newmem:
+  imul edi,[mVal]
+code:
+  add [rcx+000000B4],edi
+  jmp return
+mVal:
+dd (int)10
+expmulti:
+  jmp newmem
+  nop
+return:
+registersymbol(expmulti mVal)
+[DISABLE]
+expmulti:
+  db 01 B9 B4 00 00 00
+unregistersymbol(*)
+dealloc(*)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1337111409</ID>
+              <Description>"Multiplier Value ---&gt;"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FFFF80</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>mVal</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337111364</ID>
+          <Description>"Currency Editor"</Description>
+          <Options moHideChildren="1"/>
+          <Color>4080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>define(address,Absolum.exe+E5C072)
+define(bytes,8B 00 89 06 B8 01 00 00 00)
+[ENABLE]
+assert(address,bytes)
+alloc(newmem,$1000,Absolum.exe+E5C072)
+alloc(Crystalscr,1)
+alloc(Primordialrootscr,1)
+alloc(MetaFruitscr,1)
+alloc(Goldscr,1)
+registersymbol(Crystalscr)
+registersymbol(Primordialrootscr)
+registersymbol(MetaFruitscr)
+registersymbol(Goldscr)
+registersymbol(crystalset)
+registersymbol(primordialrootset)
+registersymbol(metafruitset)
+label(Crystalcheck)
+label(Primordialrootcheck)
+label(MetaFruitcheck)
+label(Goldcheck)
+label(crystalset)
+label(primordialrootset)
+label(metafruitset)
+label(CrystalVal)
+label(PrimordialrootVal)
+label(MetaFruitVal)
+label(GoldVal)
+label(code)
+label(return)
+newmem:
+  cmp [rax+10],8CC9EFEA
+  je Goldcheck
+  cmp r8,18
+  je Crystalcheck
+  cmp r8,26
+  je Primordialrootcheck
+  cmp r8,1C
+  je MetaFruitcheck
+  jmp code
+Crystalcheck:
+  cmp byte ptr [Crystalscr],1
+  jne code
+  jmp CrystalVal
+Primordialrootcheck:
+  cmp byte ptr [Primordialrootscr],1
+  jne code
+  jmp PrimordialrootVal
+MetaFruitcheck:
+  cmp byte ptr [MetaFruitscr],1
+  jne code
+  jmp MetaFruitVal
+Goldcheck:
+  cmp byte ptr [Goldscr],1
+  jne code
+  jmp GoldVal
+CrystalVal:
+  push rdi
+  mov rdi,[crystalset]
+  mov [rax],rdi
+  pop rdi
+  mov eax,[rax]
+  mov [rsi],eax
+  mov eax,00000001
+  jmp return
+crystalset:
+  dd (int)99900000
+PrimordialrootVal:
+  push rdi
+  mov rdi,[primordialrootset]
+  mov [rax],rdi
+  pop rdi
+  mov eax,[rax]
+  mov [rsi],eax
+  mov eax,00000001
+  jmp return
+primordialrootset:
+  dd (int)8888
+MetaFruitVal:
+  push rdi
+  mov rdi,[metafruitset]
+  mov [rax],rdi
+  pop rdi
+  mov eax,[rax]
+  mov [rsi],eax
+  mov eax,00000001
+  jmp return
+metafruitset:
+  dd (int)7777
+GoldVal:
+  mov [rax+2],#9000
+  mov eax,[rax]
+  mov [rsi],eax
+  mov eax,00000001
+  jmp return
+code:
+  mov eax,[rax]
+  mov [rsi],eax
+  mov eax,00000001
+  jmp return
+address:
+  jmp newmem
+  nop 4
+return:
+[DISABLE]
+address:
+  db bytes
+dealloc(*)
+unregistersymbol(*)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1337111365</ID>
+              <Description>"give Crystals"</Description>
+              <Color>FFFF80</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+Crystalscr:
+db 1
+{$lua}
+if syntaxcheck then return end
+local memrec = memrec or getAddressList().getMemoryRecordByDescription("give Crystals")
+local timer = createTimer()
+timer.Interval = 1 * 500
+timer.OnTimer = function(theTimerCallingThisFunction)
+  memrec.Active = false
+  timer.destroy()
+end
+{$asm}
+[DISABLE]
+Crystalscr:
+db 0
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry NoCheckbox="1">
+                  <ID>1337111370</ID>
+                  <Description>"set Value here &amp; Click "give Crystals" ---&gt;"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>00FF80</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crystalset</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1337111366</ID>
+              <Description>"give Primordialroot"</Description>
+              <Color>FFFF80</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+Primordialrootscr:
+db 1
+{$lua}
+if syntaxcheck then return end
+local memrec = memrec or getAddressList().getMemoryRecordByDescription("give Primordialroot")
+local timer = createTimer()
+timer.Interval = 1 * 500
+timer.OnTimer = function(theTimerCallingThisFunction)
+  memrec.Active = false
+  timer.destroy()
+end
+{$asm}
+[DISABLE]
+Primordialrootscr:
+db 0
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry NoCheckbox="1">
+                  <ID>1337111369</ID>
+                  <Description>"set Value here &amp; Click "give Primordialroot" ---&gt;"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>00FF80</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>primordialrootset</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1337111367</ID>
+              <Description>"give MetaFruit"</Description>
+              <Color>FFFF80</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+MetaFruitscr:
+db 1
+{$lua}
+if syntaxcheck then return end
+local memrec = memrec or getAddressList().getMemoryRecordByDescription("give MetaFruit")
+local timer = createTimer()
+timer.Interval = 1 * 500
+timer.OnTimer = function(theTimerCallingThisFunction)
+  memrec.Active = false
+  timer.destroy()
+end
+{$asm}
+[DISABLE]
+MetaFruitscr:
+db 0
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry NoCheckbox="1">
+                  <ID>1337111368</ID>
+                  <Description>"set Value here &amp; Click "give MetaFruit" ---&gt;"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>00FF80</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>metafruitset</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1337111383</ID>
+              <Description>"give 9k Gold"</Description>
+              <Color>FFFF80</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+Goldscr:
+db 1
+{$lua}
+if syntaxcheck then return end
+local memrec = memrec or getAddressList().getMemoryRecordByDescription("give MetaFruit")
+local timer = createTimer()
+timer.Interval = 1 * 500
+timer.OnTimer = function(theTimerCallingThisFunction)
+  memrec.Active = false
+  timer.destroy()
+end
+{$asm}
+[DISABLE]
+Goldscr:
+db 0
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
           <ID>33</ID>
