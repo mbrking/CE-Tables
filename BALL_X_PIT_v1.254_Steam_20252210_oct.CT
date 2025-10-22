@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="46">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1337111356</ID>
+      <Description>"------------------------------------------------------------------------"</Description>
+      <Color>008000</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1337380547</ID>
+      <Description>"BALL_X_PIT_v1.254_Steam_20252210_MBRKiNG"</Description>
+      <Options moHideChildren="1"/>
+      <Color>4080FF</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"God Mode"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(godmode,GameAssembly.dll,0F ?? ?? ?? ?? ?? 45 ?? ?? ?? E9 ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 83 ?? ?? ?? ?? ?? ?? 75 ?? 48 ?? ??)
+godmode:
+  nop 6
+registersymbol(godmode)
+[DISABLE]
+godmode:
+  db 0F 84 72 01 00 00
+unregistersymbol(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Enable Autoplay"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(autoplay,GameAssembly.dll,74 ?? 45 ?? ?? 33 ?? E8 ?? ?? ?? ?? 84 ?? 74 ?? B0 ??)
+autoplay:
+  db 90 90
+autoplay+E:
+  db 90 90
+registersymbol(autoplay)
+[DISABLE]
+autoplay:
+  db 74 44
+autoplay+E:
+  db 74 07
+unregistersymbol(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"Ball Speed Muliplier"</Description>
+          <Options moHideChildren="1"/>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(ballspeedmult,GameAssembly.dll,C7 ?? ?? ?? ?? ?? ?? 66 ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? 48 ?? ??)
+ballspeedmult+3:
+  dd (float)100
+registersymbol(ballspeedmult)
+[DISABLE]
+ballspeedmult+3:
+  db 00 00 80 3F
+unregistersymbol(*)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"Current Ball Muli"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF00FF</Color>
+              <VariableType>Float</VariableType>
+              <Address>ballspeedmult+3</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"100% CritChance / CritMultiplier"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(cc100,GameAssembly.dll,F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? 4D ?? ??)
+alloc(newmem,$1000,cc100)
+label(code)
+label(return)
+newmem:
+  mov [rax+00000110],(float)100
+  mov [rax+00000114],(float)100
+code:
+  movss xmm6,[rax+00000110]
+  jmp return
+cc100:
+  jmp newmem
+  nop 3
+return:
+registersymbol(cc100)
+[DISABLE]
+cc100:
+  db F3 0F 10 B0 10 01 00 00
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337321850</ID>
+          <Description>"Ball´s Max DMG (OHK)"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(balldmgmin,GameAssembly.dll,8B ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 ?? ?? ?? ?? ?? 66 ?? ?? ?? 0F ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? 4C ?? ?? ?? ?? ?? ??)
+alloc(newmem,$1000,balldmgmin)
+label(code)
+label(return)
+newmem:
+  mov [rdx+000000EC],(float)999999
+code:
+  mov edx,[rdx+000000EC]
+  jmp return
+balldmgmin:
+  jmp newmem
+  nop
+return:
+registersymbol(balldmgmin)
+[DISABLE]
+balldmgmin:
+  db 8B 92 EC 00 00 00
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"Max Gold + Ressources"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(ressources,GameAssembly.dll,8B ?? ?? ?? 48 ?? ?? ?? C3 E8 ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? 80 ?? ?? ?? ?? ?? ?? 75 ??)
+alloc(newmem,$1000,ressources)
+label(code)
+label(return)
+newmem:
+  mov [rcx+20],#99999
+  mov [rcx+24],#9999
+  mov [rcx+28],#9999
+  mov [rcx+2C],#9999
+code:
+  mov eax,[rcx+rax*4+20]
+  add rsp,28
+  jmp return
+ressources:
+  jmp newmem
+  nop 3
+return:
+registersymbol(ressources)
+[DISABLE]
+ressources:
+  db 8B 44 81 20 48 83 C4 28
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>49</ID>
+          <Description>"100% Acceleration "</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(accel,GameAssembly.dll,F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? 0F ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? 4C ?? ?? ??)
+alloc(newmem,$1000,accel)
+label(code)
+label(return)
+newmem:
+  mov [rax+0000010C],(float)100
+code:
+  movss xmm0,[rax+0000010C]
+  jmp return
+accel:
+  jmp newmem
+  nop 3
+return:
+registersymbol(accel)
+[DISABLE]
+accel:
+  db F3 0F 10 80 0C 01 00 00
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337321851</ID>
+          <Description>"BonusCharXP 20k (1 Round Max Level)"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(bonuscharxp,GameAssembly.dll,F3 ?? ?? ?? ?? ?? ?? ?? 83 ?? ?? ?? ?? ?? ?? 75 ?? E8 ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ??)
+alloc(newmem,$1000,bonuscharxp)
+label(code)
+label(return)
+newmem:
+  mov [rax+0000013C],(float)20000
+code:
+  movss xmm6,[rax+0000013C]
+  jmp return
+bonuscharxp:
+  jmp newmem
+  nop 3
+return:
+registersymbol(bonuscharxp)
+[DISABLE]
+bonuscharxp:
+  db F3 0F 10 B0 3C 01 00 00
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337321834</ID>
+          <Description>"PickupRange 100%"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(pickuprangemagnet,GameAssembly.dll,F3 ?? ?? ?? ?? ?? ?? ?? ?? 41 ?? ?? 48 ?? ?? 0F ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? ?? ?? ?? 3B ?? ??)
+alloc(newmem,$1000,pickuprangemagnet)
+label(code)
+label(return)
+newmem:
+  mov [rcx+0000012C],(float)100
+code:
+  movss xmm8,[rcx+0000012C]
+  jmp return
+pickuprangemagnet:
+  jmp newmem
+  nop 4
+return:
+registersymbol(pickuprangemagnet)
+[DISABLE]
+pickuprangemagnet:
+  db F3 44 0F 10 81 2C 01 00 00
+unregistersymbol(*)
+dealloc(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337321836</ID>
+          <Description>"Inf Daily Harvests"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(harvest,GameAssembly.dll,0F ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? 0F ?? ?? ?? ?? ?? 45 ?? ?? 41 ?? ?? ?? E8 ?? ?? ?? ?? 84 ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? 75 ?? 48 ?? ?? 0F ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 45 ?? ??)
+harvest:
+  db 90 E9
+registersymbol(harvest)
+[DISABLE]
+harvest:
+  db 0F 84
+unregistersymbol(*)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1337321838</ID>
+          <Description>"Freeze Harvest Clock"</Description>
+          <Color>FFFF80</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(freezeharvestclock,GameAssembly.dll,F3 ?? ?? ?? ?? 0F ?? ?? 77 ?? 0F ?? ?? F3 ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? ?? ?? ?? ??)
+freezeharvestclock:
+  nop 5
+registersymbol(freezeharvestclock)
+[DISABLE]
+freezeharvestclock:
+  db F3 0F 5C 40 68
+unregistersymbol(*)
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>104269</ID>
+      <Description>"------------------------------------------------------------------------"</Description>
+      <Color>008000</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10326</ID>
+      <Description>"Discord/PayPal-Donation-Link/OCT"</Description>
+      <Options moHideChildren="1"/>
+      <Color>40FF00</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1337111357</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10324</ID>
+          <Description>"Support/Donations can be Added to my PAYPAL.ME"</Description>
+          <Color>00FF00</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104128</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>41356</ID>
+          <Description>" [&lt;--CHECKBOX] PALPAL.ME Donation/Support Link"</Description>
+          <Color>F8EC07</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://paypal.me/mobiusce')
+{$asm}
+nop
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104152</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104270</ID>
+          <Description>"my Discord-ID:  --&gt;  ScooPaX#8840  &lt;--"</Description>
+          <Options moAlwaysHideChildren="1"/>
+          <Color>8000FF</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104155</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104156</ID>
+          <Description>"[&lt;--CHECKBOX]_OPEN_OCT_TOPIC"</Description>
+          <Color>8000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://opencheattables.com/viewtopic.php?t=1583')
+{$asm}
+nop
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104129</ID>
+          <Description>"---------------------------------------------------------------"</Description>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>104151</ID>
+          <Description>"[&lt;--CHECKBOX]_OPEN_CHEATENGINE.ORG"</Description>
+          <Color>8000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+if syntaxcheck then return end
+[ENABLE]
+ShellExecute('https://www.cheatengine.org/')
+{$asm}
+nop
+[DISABLE]
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10634</ID>
+      <Description>"------------------------------------------------------------------------"</Description>
+      <Options moHideChildren="1"/>
+      <Color>008000</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
